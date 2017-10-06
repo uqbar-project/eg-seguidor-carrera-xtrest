@@ -5,7 +5,6 @@ import ar.edu.seguidorCarrera.domain.Materia
 import ar.edu.seguidorCarrera.domain.Nota
 import ar.seguidorCarrera.rest.dto.MateriaSinNotas
 import java.util.List
-import org.apache.commons.lang.StringUtils
 import org.uqbar.xtrest.api.annotation.Body
 import org.uqbar.xtrest.api.annotation.Controller
 import org.uqbar.xtrest.api.annotation.Delete
@@ -28,16 +27,13 @@ class RestfulServer {
     }
 
 
-    /*--------------------------*/
-    /* API                      */
-    /*--------------------------*/
-
-
     @Get("/materias")
     def getMaterias() {
         response.contentType = ContentType.APPLICATION_JSON
         
-        return ok(carrera.materias.toMateriasSinNotas.toJson)
+        val materias = carrera.materias.map [each | new MateriaSinNotas(each)]
+        
+        return ok(materias.toJson)
     }
     
 
@@ -50,7 +46,7 @@ class RestfulServer {
         if (materia == null) {
             return notFound()
         } else {
-            return ok(materia.toMateriaSinNotas.toJson)
+            return ok(new MateriaSinNotas(materia).toJson)
         }
     }
 
@@ -124,31 +120,6 @@ class RestfulServer {
             return ok()
         }
     }
-
-
-    /*--------------------------*/
-    /* Lógica                   */
-    /*--------------------------*/
-
-    def List<MateriaSinNotas> toMateriasSinNotas(List<Materia> materias) {
-        materias.map [each | each.toMateriaSinNotas]
-    }
     
-    def toMateriaSinNotas(Materia materia) {
-        new MateriaSinNotas(materia)
-    }
-    
-    def buscarMateria(Carrera carrera, String nombreMateria) {
-        carrera.materias.findFirst[ 
-            StringUtils.deleteWhitespace(it.nombreMateria).toLowerCase == nombreMateria.toLowerCase
-        ]    
-    }
-
-    def buscarNota(Materia materia, String descripcionNota) {
-        materia.notas.findFirst[ 
-            StringUtils.deleteWhitespace(it.descripcion).toLowerCase == descripcionNota.toLowerCase
-        ]    
-    }
-
 }
 
