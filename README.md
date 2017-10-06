@@ -9,5 +9,6 @@ El servidor se levanta en el puerto 9000.
 
 Para ello, desde Eclipse:
 
-1. Importar este proyecto en Eclipse como **Maven project**.
-2. Ejecutar `ar.seguidorCarrera.rest.runnable.App`
+1. Tener descargado también al [dominio branch ciu](https://github.com/uqbar-project/eg-seguidor-carrera-domain-xtend/tree/ciu).
+2. Importar ambos proyectos en Eclipse como Maven project.
+3. Ejecutar `ar.seguidorCarrera.rest.runnable.App`.
