@@ -25,8 +25,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.uqbar-project</groupId>
-			<artifactId>seguidorCarrera-domain-xtend</artifactId>
-			<version>1.0.5-SNAPSHOT</version>
+			<artifactId>eg-seguidorCarrera-domain-xtend</artifactId>
+			<version>1.0.3</version>
 		</dependency>
 	</dependencies>
 
